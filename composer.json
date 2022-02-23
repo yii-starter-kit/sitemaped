@@ -1,5 +1,5 @@
 {
-    "name": "trntv/sitemaped",
+    "name": "yii-starter-kit/sitemaped",
     "description": "PHP Sitemap abstraction library",
     "type": "library",
     "license": "MIT",
@@ -7,6 +7,10 @@
         {
             "name": "Eugene Terentev",
             "email": "eugene@terentev.net"
+        },
+        {
+            "name": "Victor Gonzalez",
+            "email": "victor@vgr.cl"
         }
     ],
     "autoload": {
