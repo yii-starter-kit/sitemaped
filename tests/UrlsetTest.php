@@ -13,8 +13,9 @@ class UrlsetTest extends \PHPUnit\Framework\TestCase
     /** @var Sitemap */
     private $sitemap;
 
-    public function setUp()
+    public function setUp() : void
     {
+        parent::setUp();
         $urlset = new Urlset();
         foreach (range(1, 2) as $i) {
             $url = new Url(
@@ -56,33 +57,33 @@ class UrlsetTest extends \PHPUnit\Framework\TestCase
         }
 
         $content = (new Sitemap($urlset))->toXmlString();
-        $this->assertContains('xhtml:link', $content);
-        $this->assertContains('http://www.w3.org/1999/xhtml', $content);
+        $this->assertStringContainsString('xhtml:link', $content);
+        $this->assertStringContainsString('http://www.w3.org/1999/xhtml', $content);
     }
 
     public function testXmlOutput()
     {
         $content = (string) $this->sitemap;
         $this->assertNotEmpty($content);
-        $this->assertContains('urlset', $content);
-        $this->assertContains('video:video', $content);
+        $this->assertStringContainsString('urlset', $content);
+        $this->assertStringContainsString('video:video', $content);
     }
 
     public function testTxtOutput()
     {
         $content = $this->sitemap->toTxtString();
         $this->assertNotEmpty($content);
-        $this->assertContains('https://test.com/1', $content);
-        $this->assertNotContains('https://test.com/image/1', $content);
+        $this->assertStringContainsString('https://test.com/1', $content);
+        $this->assertStringNotContainsString('https://test.com/image/1', $content);
     }
 
     public function testGzipCompression()
     {
         $content = $this->sitemap->toXmlString(true);
         $content = gzdecode($content);
-        $this->assertContains('urlset', $content);
-        $this->assertContains('video:video', $content);
-        $this->assertContains('https://test.com/1', $content);
+        $this->assertStringContainsString('urlset', $content);
+        $this->assertStringContainsString('video:video', $content);
+        $this->assertStringContainsString('https://test.com/1', $content);
     }
 
 }
