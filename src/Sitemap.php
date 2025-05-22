@@ -276,7 +276,7 @@ class Sitemap
         }
 
         if (\is_scalar($value)) {
-            $xmlElement->nodeValue = $value;
+            $xmlElement->nodeValue = (string)$value;
         }
 
         if ($value instanceof \DateTime) {
